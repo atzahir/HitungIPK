@@ -55,8 +55,7 @@ void mainmenu()
 	cout<<"2. Hapus Data "<<endl;
 	cout<<"3. Tampilkan Data"<<endl;
 	cout<<"4. Cari Data"<<endl;
-	cout<<"5. Hapus Semua Data"<<endl;
-	cout<<"6. Exit"<<endl<<endl;
+	cout<<"5. Exit"<<endl<<endl;
 
 	cout<<"Pilihan : ";
 	cin>>pilih;
@@ -246,24 +245,6 @@ void searchDataMhs()
 				cout << "IPK                   	: " << mhs[i].nilai.ipk << endl;
 				cout << "=========================================" << endl;	
 			}
-		}
-	}
-
-	cout<<"Masukkan nama yang ingin dicari : ";
-	cin>>cari;
-
-	for (int i = 0; i < a; ++i)
-	{
-		if (cari == mhs[i].nama)
-		{
-			cout << "=========================================" << endl;
-			cout << "Nama                   : " << mhs[i].nama << endl;
-			cout << "NIM                    : " << mhs[i].nim << endl;
-			cout << "Prodi                  : " << mhs[i].prodi << endl;
-			cout << "Jumlah Sks             : " << mhs[i].nilai.jumlahsks << endl;
-			cout << "Jumlah Sks x Nilai     : " << mhs[i].nilai.ippp << endl;
-			cout << "IPK                   	: " << mhs[i].nilai.ipk << endl;
-			cout << "=========================================" << endl;	
 		}
 	}
 	system("pause");
