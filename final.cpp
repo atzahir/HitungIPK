@@ -6,13 +6,15 @@
 
 using namespace std;
 
+//Deklarasi Stack
 stack <int> s;
 stack <float> indeks;
 
+//Struct
 struct datanilai
 {
 	string kodeMK, namaMK;
-	float ipk, ipp, ippp = 0;
+	float ipk, ipmatkul, totalip = 0;
 	int jumlahMK, sks, jumlahsks = 0;
 	char predikat;
 };
@@ -27,6 +29,7 @@ struct mahasiswa
 mahasiswa mhs[100];
 int a, b, c, jml,temp;
 
+// Deklarasi Fungsi 
 void mainmenu();
 void header();
 void showDataMhs();
@@ -34,14 +37,14 @@ void deleteDataMhs();
 void searchDataMhs();
 int HitungIPK (char x, int y);
 
-
+// Main Program
 int main(int argc, char const *argv[])
 {
 	mainmenu();
-	getch();
 	return 0;
 }
 
+//Menu Utama
 void mainmenu()
 {
 	int jml, pilih, jumlahMK, sks;
@@ -64,7 +67,7 @@ void mainmenu()
 	switch (pilih)
 	{
 		case 1:
-		cout<<"Masukkan jumlah data yang ingin dimasukkan : ";
+		cout<<"Masukkan jumlah data Mahasiswa yang ingin dimasukkan : ";
 		cin>>jml;
 		for (int i = 0; i < jml; ++i)
 		{
@@ -90,13 +93,13 @@ void mainmenu()
 				cout<<"Masukkan Predikat (A/B/C/D/E)  : ";
 				cin>>mhs[a].nilai.predikat;
 				indeks.push(mhs[a].nilai.predikat);
-				mhs[a].nilai.ipp = HitungIPK(mhs[a].nilai.predikat, mhs[a].nilai.sks);
-				mhs[a].nilai.ippp += mhs[i].nilai.ipp;
+				mhs[a].nilai.ipmatkul = HitungIPK(mhs[a].nilai.predikat, mhs[a].nilai.sks);
+				mhs[a].nilai.totalip += mhs[i].nilai.ipmatkul;
 				mhs[a].nilai.jumlahsks = s.top() + mhs[a].nilai.jumlahsks;
 				s.pop();
 				indeks.pop();
 			}
-			mhs[a].nilai.ipk = mhs[a].nilai.ippp/mhs[a].nilai.jumlahsks;
+			mhs[a].nilai.ipk = mhs[a].nilai.totalip/mhs[a].nilai.jumlahsks;
 			a++;
 
 		}
@@ -123,10 +126,17 @@ void mainmenu()
 		case 5:
 		system("exit");
 		break;
+
+
+		default:
+		cout<<"\nInput yang anda masukan salah"<<endl;
+		system("pause");
+		mainmenu();
+		break;
 	}
 }
 
-
+// Header Program
 void header()
 {
 	cout<<"==========================================="<<endl;
@@ -138,27 +148,29 @@ void header()
 	cout<<"==========================================="<<endl;
 }
 
+// Menampilkan Data Mahasiswa yang telah diinputkan
 void showDataMhs()
 {
 	int j=0;
 	cout<<"Data IPK Mahasiswa"<<endl;
-	cout<<"-----------------------------------------------------------------------------------------------------------------------"<<endl;
-	cout<<"\tNo."<<"\tNama"<<"\t\tNIM	"<<"\tProdi	"<<"\t\tJumlah SKS"<<"\tJumlah SKS x nilai"<<"\tIPK"<<endl;
-	cout<<"-----------------------------------------------------------------------------------------------------------------------"<<endl;
+	cout<<"------------------------------------------------------------------------------------------------------------------------------------"<<endl;
+	cout<<"No."<<"\tNama"<<"\t\t\t\tNIM	"<<"\tProdi	"<<"\t\t\tJumlah SKS"<<"\tJumlah SKS x nilai"<<"\tIPK"<<endl;
+	cout<<"------------------------------------------------------------------------------------------------------------------------------------"<<endl;
 	for (int i = 0; i < a; ++i)
 	{
 		j=j+1;
-		cout<<"\t"<<j<<"\t";
+		cout<<j<<"\t";
 		cout<<mhs[i].nama<<"\t\t";
 		cout<<mhs[i].nim<<"\t";
 		cout<<mhs[i].prodi<<"\t\t";
-		cout<<mhs[i].nilai.jumlahsks<<"\t\t";
-		cout<<mhs[i].nilai.ippp<<"\t\t\t";
+		cout<<mhs[i].nilai.jumlahsks<<"\t\t\t";
+		cout<<mhs[i].nilai.totalip<<"\t\t\t";
 		cout<<mhs[i].nilai.ipk<<"\n";
 	}
-	cout<<"-----------------------------------------------------------------------------------------------------------------------"<<endl;
+	cout<<"------------------------------------------------------------------------------------------------------------------------------------"<<endl<<endl;
 }
 
+// Hapus Data Mahasiswa yang telah diinputkan
 void deleteDataMhs() 
 {
 	int w,x,y;
@@ -175,7 +187,7 @@ void deleteDataMhs()
 	cout << "NIM                   : " << mhs[y].nim << endl;
 	cout << "Prodi                 : " << mhs[y].prodi << endl;
 	cout << "Jumlah Sks 	         : " << mhs[y].nilai.jumlahsks << endl;
-	cout << "Jumlah Sks x Nilai 	 : " << mhs[y].nilai.ippp << endl;
+	cout << "Jumlah Sks x Nilai 	 : " << mhs[y].nilai.totalip << endl;
 	cout << "IPK         	         : " << mhs[y].nilai.ipk << endl;
 	cout << "=========================================" << endl;
 	cout << "Yakin ingin hapus? (Y/N): ";
@@ -196,12 +208,13 @@ void deleteDataMhs()
 
 }
 
+// Mencari Data Mahasiswa yang telah diinputkan
 void searchDataMhs()
 {
 	string cari;
 	int c, pilih;
 
-	cout<<"\nSilahkan pilih ingin mencari berdasarkan apa : "<<endl;
+	cout<<"\nCari Data mahasiswa berdasarkan : "<<endl;
 	cout<<"1. Nama"<<endl;
 	cout<<"2. NIM"<<endl;
 	cout<<"Pilih : ";
@@ -209,8 +222,9 @@ void searchDataMhs()
 
 	switch(pilih)
 	{
+		// Mencari berdasarkan nama
 		case 1 : 
-		cout<<"Masukkan nama yang ingin dicari : ";
+		cout<<"Masukkan nama dari Mahasiswa yang ingin dicari : ";
 		cin>>cari;
 
 		for (int i = 0; i < a; ++i)
@@ -222,14 +236,15 @@ void searchDataMhs()
 				cout << "NIM                    : " << mhs[i].nim << endl;
 				cout << "Prodi                  : " << mhs[i].prodi << endl;
 				cout << "Jumlah Sks             : " << mhs[i].nilai.jumlahsks << endl;
-				cout << "Jumlah Sks x Nilai     : " << mhs[i].nilai.ippp << endl;
+				cout << "Jumlah Sks x Nilai     : " << mhs[i].nilai.totalip << endl;
 				cout << "IPK                   	: " << mhs[i].nilai.ipk << endl;
 				cout << "=========================================" << endl;	
 			}
 		}
 
+		// Mencari berdasarkan NIM
 		case 2 : 
-		cout<<"Masukkan nama yang ingin dicari : ";
+		cout<<"Masukkan NIM dari Mahasiswa yang ingin dicari : ";
 		cin>>cari;
 
 		for (int i = 0; i < a; ++i)
@@ -241,16 +256,24 @@ void searchDataMhs()
 				cout << "NIM                    : " << mhs[i].nim << endl;
 				cout << "Prodi                  : " << mhs[i].prodi << endl;
 				cout << "Jumlah Sks             : " << mhs[i].nilai.jumlahsks << endl;
-				cout << "Jumlah Sks x Nilai     : " << mhs[i].nilai.ippp << endl;
+				cout << "Jumlah Sks x Nilai     : " << mhs[i].nilai.totalip << endl;
 				cout << "IPK                   	: " << mhs[i].nilai.ipk << endl;
 				cout << "=========================================" << endl;	
 			}
 		}
+
+		default :
+		cout<<"\nInput yang anda masukan salah"<<endl;
+		system("pause");
+		searchDataMhs();
+		break;
+
 	}
 	system("pause");
 	mainmenu();
 }
 
+// Perhitungan nilai IPK
 int HitungIPK (char x, int y)
 {
 	int ip;
