@@ -36,6 +36,7 @@ void createDataMhs();
 void showDataMhs();
 void deleteDataMhs();
 void searchDataMhs();
+void sorting();
 void about();
 int HitungIPK (char x, int y);
 
@@ -75,8 +76,9 @@ void mainmenu()
 	cout<<"2. Hapus Data "<<endl;
 	cout<<"3. Tampilkan Data"<<endl;
 	cout<<"4. Cari Data"<<endl;
-	cout<<"5. About"<<endl;
-	cout<<"6. Exit"<<endl<<endl;
+	cout<<"5. Sorting"<<endl;
+	cout<<"6. About"<<endl;
+	cout<<"7. Exit"<<endl<<endl;
 
 	cout<<"Pilihan : ";
 	cin>>pilih;
@@ -106,7 +108,13 @@ void mainmenu()
 		mainmenu();
 		break;
 
-		case 5:
+		case 5 :
+		sorting();
+		system("pause");
+		mainmenu();
+		break;
+
+		case 6:
 		system("cls");
 		header();
 		about();
@@ -114,7 +122,7 @@ void mainmenu()
 		mainmenu();
 		break;
 
-		case 6:
+		case 7:
 		system("exit");
 		break;
 
@@ -135,6 +143,8 @@ void createDataMhs()
 	cin>>jml;
 	for (int i = 0; i < jml; ++i)
 	{
+		system("cls");
+		header();
 		cout<<"\nData ke-"<<i+1<<endl;
 		cout<<"Masukkan Nama  : ";
 		getline(cin>>ws, mhs[a].nama);
@@ -157,13 +167,14 @@ void createDataMhs()
 			cout<<"Masukkan Predikat (A/B/C/D/E)  : ";
 			cin>>mhs[a].nilai.predikat;
 			indeks.push(mhs[a].nilai.predikat);
+			mhs[a].nilai.jumlahsks = s.top() + mhs[a].nilai.jumlahsks;
 			mhs[a].nilai.ipmatkul = HitungIPK(mhs[a].nilai.predikat, mhs[a].nilai.sks);
 			mhs[a].nilai.totalip += mhs[i].nilai.ipmatkul;
-			mhs[a].nilai.jumlahsks = s.top() + mhs[a].nilai.jumlahsks;
 			s.pop();
 			indeks.pop();
+			mhs[a].nilai.ipk = mhs[a].nilai.totalip/mhs[a].nilai.jumlahsks;
 		}
-		mhs[a].nilai.ipk = mhs[a].nilai.totalip/mhs[a].nilai.jumlahsks;
+
 		a++;
 
 	}
@@ -184,8 +195,8 @@ void showDataMhs()
 		cout<<mhs[i].nama<<"\t\t";
 		cout<<mhs[i].nim<<"\t";
 		cout<<mhs[i].prodi<<"\t\t";
-		cout<<mhs[i].nilai.jumlahsks<<"\t\t\t";
-		cout<<mhs[i].nilai.totalip<<"\t\t\t";
+		cout<<mhs[i].nilai.jumlahsks<<"\t\t";
+		cout<<mhs[i].nilai.totalip<<"\t\t";
 		cout<<mhs[i].nilai.ipk<<"\n";
 	}
 	cout<<"------------------------------------------------------------------------------------------------------------------------------------"<<endl<<endl;
@@ -294,6 +305,30 @@ void searchDataMhs()
 	mainmenu();
 }
 
+// pengurutan IPK
+void sorting()
+{
+	for(int i = 1; i < a; i++) 
+	{
+		for(int j = a - 1; j >= i; j--) 
+		{
+			if(mhs[j].nilai.ipk > mhs[j-1].nilai.ipk) 
+			{
+				temp = mhs[j].nilai.ipk;
+				mhs[j].nilai.ipk = mhs[j-1].nilai.ipk;
+				mhs[j-1].nilai.ipk = temp;
+			}
+		}
+	}
+	cout<<"\nMengurutkan IPK dari terbesar ke yang terkecil dari data mahasiswa : "<<endl;
+	for (int i = 0; i < a; ++i)
+	{
+		cout<<mhs[i].nilai.ipk<<" "<<endl;
+
+	}
+}
+
+// tentang program
 void about()
 {
 	cout<<"\nProgram ini merupakan program untuk menampung data mahasiswa dan juga terdapat perhitungan ipk didalamnya"<<endl<<endl;
