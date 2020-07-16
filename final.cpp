@@ -30,11 +30,13 @@ mahasiswa mhs[100];
 int a, b, c, jml,temp;
 
 // Deklarasi Fungsi 
-void mainmenu();
 void header();
+void mainmenu();
+void createDataMhs();
 void showDataMhs();
 void deleteDataMhs();
 void searchDataMhs();
+void about();
 int HitungIPK (char x, int y);
 
 // Main Program
@@ -44,7 +46,22 @@ int main(int argc, char const *argv[])
 	return 0;
 }
 
-//Menu Utama
+// Header Program
+void header()
+{
+	cout<<"==========================================="<<endl;
+	cout<<"|Kelompok 5                               |"<<endl;
+	cout<<"|                                         |"<<endl;
+	cout<<"|              DATA MAHASISWA             |"<<endl;
+	cout<<"|           DAN PERHITUNGAN IPK           |"<<endl;
+	cout<<"|                                         |"<<endl;
+	cout<<"|                                         |"<<endl;
+	cout<<"==========================================="<<endl;
+	cout<<"|         >    Selamat Datang    <        |"<<endl;
+	cout<<"==========================================="<<endl;
+}
+
+// Menu Utama
 void mainmenu()
 {
 	int jml, pilih, jumlahMK, sks;
@@ -58,7 +75,8 @@ void mainmenu()
 	cout<<"2. Hapus Data "<<endl;
 	cout<<"3. Tampilkan Data"<<endl;
 	cout<<"4. Cari Data"<<endl;
-	cout<<"5. Exit"<<endl<<endl;
+	cout<<"5. About"<<endl;
+	cout<<"6. Exit"<<endl<<endl;
 
 	cout<<"Pilihan : ";
 	cin>>pilih;
@@ -67,42 +85,7 @@ void mainmenu()
 	switch (pilih)
 	{
 		case 1:
-		cout<<"Masukkan jumlah data Mahasiswa yang ingin dimasukkan : ";
-		cin>>jml;
-		for (int i = 0; i < jml; ++i)
-		{
-			cout<<"\nData ke-"<<i+1<<endl;
-			cout<<"Masukkan Nama  : ";
-			getline(cin>>ws, mhs[a].nama);
-			cout<<"Masukkan NIM   : ";
-			cin>>mhs[a].nim;
-			cout<<"Masukkan Prodi : ";
-			getline(cin>>ws, mhs[a].prodi);
-			cout<<"Masukkan Jumlah Mata Kuliah   : ";
-			cin>>mhs[a].nilai.jumlahMK;
-			for (int j = 0; j < mhs[a].nilai.jumlahMK; ++j)
-			{
-				cout<<"\nMata Kuliah ke-"<<j+1<<endl;
-				cout<<"Masukkan Kode Mata Kuliah      : ";
-				getline(cin>>ws, mhs[a].nilai.kodeMK);
-				cout<<"Masukkan Nama Mata Kuliah      : ";
-				getline(cin>>ws, mhs[a].nilai.namaMK);
-				cout<<"Masukkan Sks                   : ";
-				cin>>mhs[a].nilai.sks;
-				s.push(mhs[a].nilai.sks);
-				cout<<"Masukkan Predikat (A/B/C/D/E)  : ";
-				cin>>mhs[a].nilai.predikat;
-				indeks.push(mhs[a].nilai.predikat);
-				mhs[a].nilai.ipmatkul = HitungIPK(mhs[a].nilai.predikat, mhs[a].nilai.sks);
-				mhs[a].nilai.totalip += mhs[i].nilai.ipmatkul;
-				mhs[a].nilai.jumlahsks = s.top() + mhs[a].nilai.jumlahsks;
-				s.pop();
-				indeks.pop();
-			}
-			mhs[a].nilai.ipk = mhs[a].nilai.totalip/mhs[a].nilai.jumlahsks;
-			a++;
-
-		}
+		createDataMhs();
 		goto menu;
 		break;
 
@@ -124,6 +107,14 @@ void mainmenu()
 		break;
 
 		case 5:
+		system("cls");
+		header();
+		about();
+		system("pause");
+		mainmenu();
+		break;
+
+		case 6:
 		system("exit");
 		break;
 
@@ -136,16 +127,46 @@ void mainmenu()
 	}
 }
 
-// Header Program
-void header()
+
+//Menambahkan Data Mahasiswa
+void createDataMhs()
 {
-	cout<<"==========================================="<<endl;
-	cout<<"|                                         |"<<endl;
-	cout<<"|         MENGHITUNG IPK MAHASISWA        |"<<endl;
-	cout<<"|                                         |"<<endl;
-	cout<<"==========================================="<<endl;
-	cout<<"|         >    Selamat Datang    <        |"<<endl;
-	cout<<"==========================================="<<endl;
+	cout<<"Masukkan jumlah data Mahasiswa yang ingin dimasukkan : ";
+	cin>>jml;
+	for (int i = 0; i < jml; ++i)
+	{
+		cout<<"\nData ke-"<<i+1<<endl;
+		cout<<"Masukkan Nama  : ";
+		getline(cin>>ws, mhs[a].nama);
+		cout<<"Masukkan NIM   : ";
+		cin>>mhs[a].nim;
+		cout<<"Masukkan Prodi : ";
+		getline(cin>>ws, mhs[a].prodi);
+		cout<<"Masukkan Jumlah Mata Kuliah   : ";
+		cin>>mhs[a].nilai.jumlahMK;
+		for (int j = 0; j < mhs[a].nilai.jumlahMK; ++j)
+		{
+			cout<<"\nMata Kuliah ke-"<<j+1<<endl;
+			cout<<"Masukkan Kode Mata Kuliah      : ";
+			getline(cin>>ws, mhs[a].nilai.kodeMK);
+			cout<<"Masukkan Nama Mata Kuliah      : ";
+			getline(cin>>ws, mhs[a].nilai.namaMK);
+			cout<<"Masukkan Sks                   : ";
+			cin>>mhs[a].nilai.sks;
+			s.push(mhs[a].nilai.sks);
+			cout<<"Masukkan Predikat (A/B/C/D/E)  : ";
+			cin>>mhs[a].nilai.predikat;
+			indeks.push(mhs[a].nilai.predikat);
+			mhs[a].nilai.ipmatkul = HitungIPK(mhs[a].nilai.predikat, mhs[a].nilai.sks);
+			mhs[a].nilai.totalip += mhs[i].nilai.ipmatkul;
+			mhs[a].nilai.jumlahsks = s.top() + mhs[a].nilai.jumlahsks;
+			s.pop();
+			indeks.pop();
+		}
+		mhs[a].nilai.ipk = mhs[a].nilai.totalip/mhs[a].nilai.jumlahsks;
+		a++;
+
+	}
 }
 
 // Menampilkan Data Mahasiswa yang telah diinputkan
@@ -182,14 +203,14 @@ void deleteDataMhs()
 
 	y = x - 1;
 	cout << "Data yang akan dihapus : " << endl;
-	cout << "=========================================" << endl;
+	cout << "============================================================" << endl;
 	cout << "Nama                  : " << mhs[y].nama << endl;
 	cout << "NIM                   : " << mhs[y].nim << endl;
 	cout << "Prodi                 : " << mhs[y].prodi << endl;
 	cout << "Jumlah Sks 	         : " << mhs[y].nilai.jumlahsks << endl;
 	cout << "Jumlah Sks x Nilai 	 : " << mhs[y].nilai.totalip << endl;
 	cout << "IPK         	         : " << mhs[y].nilai.ipk << endl;
-	cout << "=========================================" << endl;
+	cout << "============================================================" << endl;
 	cout << "Yakin ingin hapus? (Y/N): ";
 	cin >> z;
 
@@ -231,14 +252,14 @@ void searchDataMhs()
 		{
 			if (cari == mhs[i].nama)
 			{
-				cout << "=========================================" << endl;
+				cout << "============================================================" << endl;
 				cout << "Nama                   : " << mhs[i].nama << endl;
 				cout << "NIM                    : " << mhs[i].nim << endl;
 				cout << "Prodi                  : " << mhs[i].prodi << endl;
 				cout << "Jumlah Sks             : " << mhs[i].nilai.jumlahsks << endl;
 				cout << "Jumlah Sks x Nilai     : " << mhs[i].nilai.totalip << endl;
 				cout << "IPK                   	: " << mhs[i].nilai.ipk << endl;
-				cout << "=========================================" << endl;	
+				cout << "============================================================" << endl;
 			}
 		}
 
@@ -271,6 +292,21 @@ void searchDataMhs()
 	}
 	system("pause");
 	mainmenu();
+}
+
+void about()
+{
+	cout<<"\nProgram ini merupakan program untuk menampung data mahasiswa dan juga terdapat perhitungan ipk didalamnya"<<endl<<endl;
+
+	cout<<"Tim Penyusun : "<<endl<<endl;
+	cout<<"1. Akhmad Taajuddin Zahir                   19.11.3209 "<<endl;
+	cout<<"2. Anna Caroline Arruan Banga               19.11.3193 "<<endl;
+	cout<<"3. Ikhsan Arisyahdani                       19.11.3211 "<<endl;
+	cout<<"4. Rangga Ihza Umayah                       19.11.3187 "<<endl;
+	cout<<"5. Muhammad Fahmuddin                       19.11.3245 "<<endl;
+	cout<<"6. Galih Waskito Utomo                      19.11.3232 "<<endl;
+	cout<<"7. Yohan Wahid Subhan                       19.11.3212 "<<endl;
+	cout<<"8. Fajar Bima Tri Jatmiko                   19.11.3207 "<<endl<<endl;
 }
 
 // Perhitungan nilai IPK
