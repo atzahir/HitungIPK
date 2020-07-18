@@ -273,6 +273,7 @@ void searchDataMhs()
 				cout << "============================================================" << endl;
 			}
 		}
+                break;
 
 		// Mencari berdasarkan NIM
 		case 2 : 
@@ -293,6 +294,7 @@ void searchDataMhs()
 				cout << "=========================================" << endl;	
 			}
 		}
+                break;
 
 		default :
 		cout<<"\nInput yang anda masukan salah"<<endl;
