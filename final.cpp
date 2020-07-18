@@ -296,12 +296,6 @@ void searchDataMhs()
 		}
                 break;
 
-		default :
-		cout<<"\nInput yang anda masukan salah"<<endl;
-		system("pause");
-		searchDataMhs();
-		break;
-
 	}
 	system("pause");
 	mainmenu();
