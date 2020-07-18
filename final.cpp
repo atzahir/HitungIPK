@@ -334,8 +334,8 @@ void about()
 	cout<<"\nProgram ini merupakan program untuk menampung data mahasiswa dan juga terdapat perhitungan ipk didalamnya"<<endl<<endl;
 
 	cout<<"Tim Penyusun : "<<endl<<endl;
-	cout<<"1. Akhmad Taajuddin Zahir                   19.11.3209 "<<endl;
-	cout<<"2. Anna Caroline Arruan Banga               19.11.3193 "<<endl;
+	cout<<"1. Akhmad Taajuddin Zahir                   19.11.3193 "<<endl;
+	cout<<"2. Anna Caroline Arruan Banga               19.11.3209 "<<endl;
 	cout<<"3. Ikhsan Arisyahdani                       19.11.3211 "<<endl;
 	cout<<"4. Rangga Ihza Umayah                       19.11.3187 "<<endl;
 	cout<<"5. Muhammad Fahmuddin                       19.11.3245 "<<endl;
