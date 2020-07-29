@@ -32,7 +32,7 @@ int a, b, c, jml,temp;
 // Deklarasi Fungsi 
 void header();
 void mainmenu();
-void createDataMhs();
+void createDataMhs(); 
 void showDataMhs();
 void deleteDataMhs();
 void searchDataMhs();
